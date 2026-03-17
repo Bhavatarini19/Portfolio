@@ -64,7 +64,7 @@ export default function Hero() {
   }
 
   return (
-    <section id="home" style={{ minHeight: '100vh', position: 'relative', display: 'flex', flexDirection: 'column', justifyContent: 'center', backgroundColor: 'transparent', overflow: 'hidden' }}>
+    <section id="home" style={{ minHeight: '100vh', position: 'relative', display: 'flex', flexDirection: 'column', justifyContent: 'center', backgroundColor: t.bodyBg, overflow: 'hidden' }}>
       <OceanCanvas />
       <div style={{ maxWidth: 1100, margin: '0 auto', padding: 'max(88px,10vh) 1.5rem 4rem', width: '100%', position: 'relative', zIndex: 1 }}>
 

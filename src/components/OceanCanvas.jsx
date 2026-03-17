@@ -35,21 +35,24 @@ export default function OceanCanvas() {
     const ctx = canvas.getContext('2d')
     const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
 
-    const syncSize = () => {
+    const resize = () => {
       const dpr = window.devicePixelRatio || 1
-      const w = canvas.offsetWidth
-      const h = canvas.offsetHeight
-      if (!w || !h) return false
-      if (w === dims.current.w && h === dims.current.h) return true
-      canvas.width  = w * dpr
-      canvas.height = h * dpr
+      const vp  = window.visualViewport
+      const w   = vp ? Math.round(vp.width)  : window.innerWidth
+      const h   = vp ? Math.round(vp.height) : window.innerHeight
+      canvas.width        = w * dpr
+      canvas.height       = h * dpr
+      canvas.style.width  = w + 'px'
+      canvas.style.height = h + 'px'
       ctx.setTransform(1, 0, 0, 1, 0, 0)
       ctx.scale(dpr, dpr)
       dims.current = { w, h }
-      return true
     }
-    requestAnimationFrame(syncSize)
-    window.addEventListener('resize', syncSize, { passive: true })
+    resize()
+    window.addEventListener('resize', resize, { passive: true })
+    if (window.visualViewport) {
+      window.visualViewport.addEventListener('resize', resize, { passive: true })
+    }
 
     particles.current = Array.from({ length: 18 }, () => ({
       x: Math.random(), y: 0.62 + Math.random() * 0.36,
@@ -61,7 +64,6 @@ export default function OceanCanvas() {
 
     let lastTs = 0
     const draw = (ts) => {
-      syncSize()
       const dt = Math.min((ts - lastTs) / 1000, 0.05)
       lastTs = ts
       const { w, h } = dims.current
@@ -291,7 +293,10 @@ export default function OceanCanvas() {
     animRef.current = requestAnimationFrame(draw)
     return () => {
       cancelAnimationFrame(animRef.current)
-      window.removeEventListener('resize', syncSize)
+      window.removeEventListener('resize', resize)
+      if (window.visualViewport) {
+        window.visualViewport.removeEventListener('resize', resize)
+      }
     }
   }, []) // only runs once — themeRef stays current via the other useEffect
 
