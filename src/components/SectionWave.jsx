@@ -19,7 +19,7 @@ export default function SectionWave({ flip = false, solidBlue = false }) {
       <motion.svg
         width="200%" height="72" viewBox="0 0 2880 72"
         preserveAspectRatio="none"
-        animate={{ x: [0, -1440] }}
+        animate={{ x: ['0%', '-50%'] }}
         transition={{ duration: 26, repeat: Infinity, ease: 'linear' }}
         style={{ position: 'absolute', top: 0, left: 0 }}
       >
@@ -39,7 +39,7 @@ export default function SectionWave({ flip = false, solidBlue = false }) {
       <motion.svg
         width="200%" height="72" viewBox="0 0 2880 72"
         preserveAspectRatio="none"
-        animate={{ x: [0, -1440] }}
+        animate={{ x: ['0%', '-50%'] }}
         transition={{ duration: 40, repeat: Infinity, ease: 'linear' }}
         style={{ position: 'absolute', top: 0, left: 0 }}
       >
