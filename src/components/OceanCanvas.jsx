@@ -37,8 +37,10 @@ export default function OceanCanvas() {
 
     const resize = () => {
       const dpr = window.devicePixelRatio || 1
-      const w = window.innerWidth
-      const h = window.innerHeight
+      const parent = canvas.parentElement
+      const w = parent ? parent.offsetWidth  : window.innerWidth
+      const h = parent ? parent.offsetHeight : window.innerHeight
+      if (w === 0 || h === 0) return
       canvas.width  = w * dpr
       canvas.height = h * dpr
       canvas.style.width  = w + 'px'
@@ -48,7 +50,9 @@ export default function OceanCanvas() {
       dims.current = { w, h }
     }
     resize()
-    window.addEventListener('resize', resize, { passive: true })
+    // Watch the Hero container for size changes (handles mobile stacking)
+    const ro = new ResizeObserver(resize)
+    if (canvas.parentElement) ro.observe(canvas.parentElement)
 
     particles.current = Array.from({ length: 18 }, () => ({
       x: Math.random(), y: 0.62 + Math.random() * 0.36,
@@ -282,7 +286,7 @@ export default function OceanCanvas() {
     animRef.current = requestAnimationFrame(draw)
     return () => {
       cancelAnimationFrame(animRef.current)
-      window.removeEventListener('resize', resize)
+      ro.disconnect()
     }
   }, []) // only runs once — themeRef stays current via the other useEffect
 

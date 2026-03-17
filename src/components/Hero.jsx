@@ -126,11 +126,12 @@ export default function Hero() {
             <img
               src="/profile.png"
               alt="Bhavatarini Thangaraju"
+              className="profile-img"
               onError={e => {
                 e.currentTarget.style.display = 'none'
                 document.getElementById('bt-avatar').style.display = 'flex'
               }}
-              style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'top center', position: 'absolute', inset: 0, transform: 'scale(1.85) translate(-4%, -18%)', transformOrigin: 'top center' }}
+              style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'top center', position: 'absolute', inset: 0, transformOrigin: 'top center' }}
             />
             {/* Fallback initials */}
             <div id="bt-avatar" style={{
@@ -273,21 +274,26 @@ export default function Hero() {
       </motion.div>
 
       <style>{`
+        .profile-img { transform: scale(1.85) translate(-4%, -18%); }
+
         @media (max-width: 860px) {
           .bento-grid {
             grid-template-columns: 1fr 1fr !important;
             grid-template-rows: auto !important;
           }
           .bento-grid > *:nth-child(1) { grid-column: 1 / 3 !important; grid-row: auto !important; }
-          .bento-grid > *:nth-child(2) { grid-column: 1 / 3 !important; grid-row: auto !important; min-height: 240px !important; }
+          .bento-grid > *:nth-child(2) { grid-column: 1 / 3 !important; grid-row: auto !important; min-height: 320px !important; }
           .bento-grid > *:nth-child(3) { grid-column: 1 !important; grid-row: auto !important; }
           .bento-grid > *:nth-child(4) { grid-column: 2 !important; grid-row: auto !important; }
           .bento-grid > *:nth-child(5) { grid-column: 1 / 3 !important; grid-row: auto !important; }
           .bento-grid > *:nth-child(6) { grid-column: 1 / 3 !important; grid-row: auto !important; }
+          .profile-img { transform: scale(1.4) translate(-2%, -12%); }
         }
         @media (max-width: 520px) {
           .bento-grid { grid-template-columns: 1fr !important; }
           .bento-grid > * { grid-column: 1 !important; }
+          .bento-grid > *:nth-child(2) { min-height: 280px !important; }
+          .profile-img { transform: scale(1.3) translate(-2%, -10%); }
         }
       `}</style>
     </section>
