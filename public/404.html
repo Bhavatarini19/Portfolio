@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>404 — Lost at Sea · BT</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { height: 100%; width: 100%; overflow: hidden; }
+    body { background: #030A18; font-family: 'Inter', sans-serif; }
+    canvas { position: fixed; inset: 0; width: 100%; height: 100%; display: block; }
+    .content {
+      position: relative; z-index: 10;
+      height: 100vh; display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      text-align: center; padding: 2rem;
+      gap: 1.4rem;
+    }
+    .code {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(5rem, 15vw, 9rem);
+      font-weight: 700;
+      color: rgba(91,170,191,0.18);
+      line-height: 1;
+      letter-spacing: -0.04em;
+      user-select: none;
+    }
+    .title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.6rem, 4vw, 2.6rem);
+      font-weight: 700;
+      color: #D6EDF8;
+      line-height: 1.2;
+    }
+    .title span { color: #5BAABF; }
+    .sub {
+      font-size: 0.95rem;
+      color: #5E8EA8;
+      max-width: 380px;
+      line-height: 1.7;
+    }
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 0.75rem 2rem;
+      background: linear-gradient(135deg, #1A6882, #3aaec8);
+      color: #fff; border: none; border-radius: 12px;
+      font-size: 0.875rem; font-weight: 600; cursor: pointer;
+      text-decoration: none; letter-spacing: 0.01em;
+      box-shadow: 0 8px 24px rgba(26,104,130,0.35);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      margin-top: 0.5rem;
+    }
+    .btn:hover { transform: translateY(-2px); box-shadow: 0 12px 30px rgba(26,104,130,0.5); }
+    .compass {
+      font-size: 2.4rem;
+      animation: spin 6s linear infinite;
+    }
+    @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+  </style>
+</head>
+<body>
+  <canvas id="c"></canvas>
+  <div class="content">
+    <div class="code">404</div>
+    <div class="compass">🧭</div>
+    <div class="title">Lost at <span>Sea</span></div>
+    <p class="sub">These waters are uncharted. The page you're looking for drifted away — perhaps the tide took it.</p>
+    <a class="btn" href="/">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12L12 3l9 9"/><path d="M9 21V12h6v9"/></svg>
+      Return to shore
+    </a>
+  </div>
+
+  <script>
+    const canvas = document.getElementById('c')
+    const ctx = canvas.getContext('2d')
+
+    const STARS = Array.from({ length: 110 }, () => ({
+      x: Math.random(), y: Math.random() * 0.65,
+      r: Math.random() * 1.2 + 0.3,
+      base: Math.random() * 0.55 + 0.25,
+      phase: Math.random() * Math.PI * 2,
+      speed: Math.random() * 0.8 + 0.3,
+    }))
+
+    const WAVES = [
+      { amp: 8,  freq: 0.009,  speed: 0.14, yBase: 0.72, cr: 18, cg: 55, cb: 105, ca: 0.40 },
+      { amp: 6,  freq: 0.013,  speed: 0.20, yBase: 0.79, cr: 14, cg: 44, cb: 86,  ca: 0.30 },
+      { amp: 4,  freq: 0.019,  speed: 0.29, yBase: 0.86, cr: 10, cg: 34, cb: 70,  ca: 0.22 },
+    ]
+    const offsets = WAVES.map(() => Math.random() * Math.PI * 2)
+
+    let w = 0, h = 0
+    function resize() {
+      const dpr = window.devicePixelRatio || 1
+      w = window.innerWidth; h = window.innerHeight
+      canvas.width = w * dpr; canvas.height = h * dpr
+      canvas.style.width = w + 'px'; canvas.style.height = h + 'px'
+      ctx.setTransform(1,0,0,1,0,0); ctx.scale(dpr, dpr)
+    }
+    resize()
+    window.addEventListener('resize', resize)
+
+    let last = 0
+    function draw(ts) {
+      const dt = Math.min((ts - last) / 1000, 0.05)
+      last = ts
+      if (w === 0) { requestAnimationFrame(draw); return }
+
+      STARS.forEach(s => s.phase += s.speed * dt)
+      offsets.forEach((_, i) => offsets[i] += WAVES[i].speed * dt)
+
+      ctx.clearRect(0, 0, w, h)
+
+      // Background
+      const bg = ctx.createLinearGradient(0, 0, 0, h)
+      bg.addColorStop(0,    'rgb(8,22,52)')
+      bg.addColorStop(0.42, 'rgb(6,28,65)')
+      bg.addColorStop(1,    'rgb(4,18,48)')
+      ctx.fillStyle = bg; ctx.fillRect(0, 0, w, h)
+
+      // Stars
+      STARS.forEach(s => {
+        const a = s.base * (0.55 + 0.45 * Math.sin(s.phase))
+        ctx.beginPath()
+        ctx.arc(s.x * w, s.y * h, s.r, 0, Math.PI * 2)
+        ctx.fillStyle = `rgba(210,235,255,${a.toFixed(2)})`
+        ctx.fill()
+      })
+
+      // Moon
+      const celX = w * 0.82, celY = h * 0.14
+      const celR = Math.min(w, h) * 0.046
+      ctx.globalAlpha = 0.25
+      const mg = ctx.createRadialGradient(celX - celR*0.2, celY - celR*0.2, celR*0.01, celX, celY, celR)
+      mg.addColorStop(0, 'rgba(240,248,255,0.96)')
+      mg.addColorStop(0.55, 'rgba(215,235,255,0.90)')
+      mg.addColorStop(1, 'rgba(190,218,248,0.82)')
+      ctx.beginPath(); ctx.arc(celX, celY, celR, 0, Math.PI*2)
+      ctx.fillStyle = mg; ctx.fill()
+      ctx.globalAlpha = 1
+
+      // Waves
+      WAVES.forEach((wv, i) => {
+        const p = offsets[i], baseY = h * wv.yBase
+        const wg = ctx.createLinearGradient(0, baseY - wv.amp, 0, baseY + wv.amp * 5)
+        wg.addColorStop(0, `rgba(${wv.cr},${wv.cg},${wv.cb},${wv.ca})`)
+        wg.addColorStop(1, `rgba(${wv.cr},${wv.cg},${wv.cb},0)`)
+        ctx.beginPath(); ctx.moveTo(0, h)
+        for (let x = 0; x <= w; x += 3) {
+          const y = baseY + Math.sin(x * wv.freq + p) * wv.amp + Math.sin(x * wv.freq * 1.7 + p * 0.6) * (wv.amp * 0.28)
+          ctx.lineTo(x, y)
+        }
+        ctx.lineTo(w, h); ctx.closePath()
+        ctx.fillStyle = wg; ctx.fill()
+        ctx.beginPath()
+        for (let x = 0; x <= w; x += 3) {
+          const y = baseY + Math.sin(x * wv.freq + p) * wv.amp + Math.sin(x * wv.freq * 1.7 + p * 0.6) * (wv.amp * 0.28)
+          x === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y)
+        }
+        ctx.strokeStyle = `rgba(100,170,210,${(0.18 - i*0.04).toFixed(2)})`
+        ctx.lineWidth = 0.8; ctx.stroke()
+      })
+
+      requestAnimationFrame(draw)
+    }
+    requestAnimationFrame(draw)
+  </script>
+</body>
+</html>

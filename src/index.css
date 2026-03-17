@@ -1,0 +1,83 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: #94C8E6;
+    color: #1C2B38;
+    font-family: 'Inter', system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    line-height: 1.6;
+  }
+
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  /* Improve heading rendering */
+  h1, h2, h3, h4 {
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Smooth focus outlines */
+  :focus-visible {
+    outline: 2px solid #2C6E73;
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  /* Remove outline for mouse users */
+  :focus:not(:focus-visible) {
+    outline: none;
+  }
+}
+
+@keyframes section-rise {
+  0%   { transform: translateY(0);       opacity: 0;    }
+  8%   {                                 opacity: 0.28; }
+  85%  {                                 opacity: 0.18; }
+  100% { transform: translateY(-100px);  opacity: 0;    }
+}
+
+@keyframes section-twinkle {
+  0%, 100% { opacity: 0.18; transform: scale(1);    }
+  50%      { opacity: 0.60; transform: scale(1.35); }
+}
+
+/* Respect prefers-reduced-motion for CSS animations */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto !important; }
+  .nav-link-hover::after { transition: none !important; }
+  .card-hover { transition: none !important; }
+}
+@media (prefers-reduced-motion: reduce) {
+  [style*="section-rise"], [style*="section-twinkle"] { animation: none !important; }
+}
+
+@layer utilities {
+  /* Teal gradient text */
+  .text-gradient-teal {
+    background: linear-gradient(135deg, #2C6E73 0%, #8FCBC2 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Subtle card hover shadow */
+  .card-hover {
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+  }
+  .card-hover:hover {
+    box-shadow: 0 12px 40px rgba(31, 42, 42, 0.11);
+    transform: translateY(-4px);
+  }
+}
