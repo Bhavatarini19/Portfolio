@@ -275,7 +275,7 @@ export default function Hero() {
       </motion.div>
 
       <style>{`
-        .profile-img { transform: scale(1.85) translate(-4%, -18%); }
+        .profile-img { transform: none; }
 
         @media (max-width: 860px) {
           .bento-grid {
