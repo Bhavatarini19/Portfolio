@@ -121,7 +121,7 @@ export default function Loader({ onComplete }) {
           width="200%" height="110"
           viewBox="0 0 2880 110"
           preserveAspectRatio="none"
-          animate={{ x: [0, -1440] }}
+          animate={{ x: ['0%', '-50%'] }}
           transition={{ duration: 5, repeat: Infinity, ease: 'linear' }}
           style={{ position: 'absolute', bottom: 0, left: 0 }}
         >
@@ -135,7 +135,7 @@ export default function Loader({ onComplete }) {
           width="200%" height="110"
           viewBox="0 0 2880 110"
           preserveAspectRatio="none"
-          animate={{ x: [0, -1440] }}
+          animate={{ x: ['0%', '-50%'] }}
           transition={{ duration: 7.5, repeat: Infinity, ease: 'linear' }}
           style={{ position: 'absolute', bottom: 0, left: 0 }}
         >
@@ -149,7 +149,7 @@ export default function Loader({ onComplete }) {
           width="200%" height="110"
           viewBox="0 0 2880 110"
           preserveAspectRatio="none"
-          animate={{ x: [-720, -2160] }}
+          animate={{ x: ['-25%', '-75%'] }}
           transition={{ duration: 11, repeat: Infinity, ease: 'linear' }}
           style={{ position: 'absolute', bottom: 0, left: 0 }}
         >

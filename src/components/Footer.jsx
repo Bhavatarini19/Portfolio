@@ -36,7 +36,7 @@ export default function Footer() {
           width="200%" height="32"
           viewBox="0 0 2880 32"
           preserveAspectRatio="none"
-          animate={{ x: [0, -1440] }}
+          animate={{ x: ['0%', '-50%'] }}
           transition={{ duration: 22, repeat: Infinity, ease: 'linear' }}
           style={{ display: 'block' }}
         >
