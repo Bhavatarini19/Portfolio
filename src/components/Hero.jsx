@@ -265,6 +265,7 @@ export default function Hero() {
 
       {/* Scroll indicator */}
       <motion.div
+        className="scroll-hint"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.4 }}
@@ -288,25 +289,22 @@ export default function Hero() {
           .bento-grid > *:nth-child(5) { grid-column: 1 / 3 !important; grid-row: auto !important; }
           .bento-grid > *:nth-child(6) { grid-column: 1 / 3 !important; grid-row: auto !important; }
 
-          /* Circle photo card on tablet/mobile */
           .photo-card {
-            width: 170px !important;
-            height: 170px !important;
+            height: 260px !important;
             min-height: unset !important;
-            border-radius: 50% !important;
-            justify-self: center !important;
-            box-shadow: 0 12px 32px rgba(0,0,0,0.18), 0 0 0 4px rgba(26,104,130,0.14) !important;
+            border-radius: 18px !important;
           }
-          .profile-img { transform: scale(1.55) translate(-3%, -14%); }
+          .profile-img { transform: scale(1.1) translate(-3%, -10%); }
+          .scroll-hint { display: none !important; }
         }
         @media (max-width: 520px) {
           .bento-grid { grid-template-columns: 1fr !important; }
           .bento-grid > * { grid-column: 1 !important; }
           .photo-card {
-            width: 150px !important;
-            height: 150px !important;
+            height: 220px !important;
+            border-radius: 18px !important;
           }
-          .profile-img { transform: scale(1.5) translate(-3%, -12%); }
+          .profile-img { transform: scale(1.1) translate(-3%, -10%); }
         }
       `}</style>
     </section>
