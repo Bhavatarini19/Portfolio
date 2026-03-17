@@ -294,7 +294,7 @@ export default function Hero() {
             min-height: unset !important;
             border-radius: 18px !important;
           }
-          .profile-img { transform: scale(1.1) translate(-3%, -10%); }
+          .profile-img { transform: none; object-position: top center; }
           .scroll-hint { display: none !important; }
         }
         @media (max-width: 520px) {
@@ -304,7 +304,7 @@ export default function Hero() {
             height: 220px !important;
             border-radius: 18px !important;
           }
-          .profile-img { transform: scale(1.1) translate(-3%, -10%); }
+          .profile-img { transform: none; object-position: top center; }
         }
       `}</style>
     </section>
