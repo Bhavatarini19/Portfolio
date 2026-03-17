@@ -36,23 +36,24 @@ export default function OceanCanvas() {
     const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
 
     const resize = () => {
+      // Read the canvas's own rendered CSS dimensions (set by width/height:100% in style)
+      // Never write canvas.style.width/height — let CSS control the visual size
       const dpr = window.devicePixelRatio || 1
-      const parent = canvas.parentElement
-      const w = parent ? parent.offsetWidth  : window.innerWidth
-      const h = parent ? parent.offsetHeight : window.innerHeight
-      if (w === 0 || h === 0) return
+      const w = canvas.offsetWidth
+      const h = canvas.offsetHeight
+      if (!w || !h) return
       canvas.width  = w * dpr
       canvas.height = h * dpr
-      canvas.style.width  = w + 'px'
-      canvas.style.height = h + 'px'
       ctx.setTransform(1, 0, 0, 1, 0, 0)
       ctx.scale(dpr, dpr)
       dims.current = { w, h }
     }
-    resize()
-    // Watch the Hero container for size changes (handles mobile stacking)
-    const ro = new ResizeObserver(resize)
+    // Defer first resize so CSS layout has applied
+    requestAnimationFrame(resize)
+    // Debounce ResizeObserver through rAF to avoid feedback loops
+    const ro = new ResizeObserver(() => requestAnimationFrame(resize))
     if (canvas.parentElement) ro.observe(canvas.parentElement)
+    window.addEventListener('resize', resize, { passive: true })
 
     particles.current = Array.from({ length: 18 }, () => ({
       x: Math.random(), y: 0.62 + Math.random() * 0.36,
@@ -294,6 +295,7 @@ export default function OceanCanvas() {
     return () => {
       cancelAnimationFrame(animRef.current)
       ro.disconnect()
+      window.removeEventListener('resize', resize)
     }
   }, []) // only runs once — themeRef stays current via the other useEffect
 
