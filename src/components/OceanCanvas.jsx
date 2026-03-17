@@ -72,7 +72,8 @@ export default function OceanCanvas() {
       if (!t || !t.waveColors) { animRef.current = requestAnimationFrame(draw); return }
 
       if (!reduced) {
-        waveOffsets.current = waveOffsets.current.map((o, i) => o + WAVE_BASE[i].speed * dt)
+        const freqMultForSpeed = Math.max(1, 1200 / Math.max(w, 1))
+        waveOffsets.current = waveOffsets.current.map((o, i) => o + WAVE_BASE[i].speed * freqMultForSpeed * dt)
         celestialR.current += dt * 0.10
         STARS.forEach(s => { s.phase += s.speed * dt })
       }
