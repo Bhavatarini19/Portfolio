@@ -112,7 +112,7 @@ export default function Hero() {
           </motion.div>
 
           {/* ── PHOTO — spans rows 1–2 ──────────────────────── */}
-          <motion.div {...tile(0.14)} style={{
+          <motion.div {...tile(0.14)} className="photo-card" style={{
             ...GLASS,
             gridColumn: '4',
             gridRow: '1 / 3',
@@ -282,18 +282,31 @@ export default function Hero() {
             grid-template-rows: auto !important;
           }
           .bento-grid > *:nth-child(1) { grid-column: 1 / 3 !important; grid-row: auto !important; }
-          .bento-grid > *:nth-child(2) { grid-column: 1 / 3 !important; grid-row: auto !important; min-height: 320px !important; }
+          .bento-grid > *:nth-child(2) { grid-column: 1 / 3 !important; grid-row: auto !important; }
           .bento-grid > *:nth-child(3) { grid-column: 1 !important; grid-row: auto !important; }
           .bento-grid > *:nth-child(4) { grid-column: 2 !important; grid-row: auto !important; }
           .bento-grid > *:nth-child(5) { grid-column: 1 / 3 !important; grid-row: auto !important; }
           .bento-grid > *:nth-child(6) { grid-column: 1 / 3 !important; grid-row: auto !important; }
-          .profile-img { transform: scale(1.4) translate(-2%, -12%); }
+
+          /* Circle photo card on tablet/mobile */
+          .photo-card {
+            width: 170px !important;
+            height: 170px !important;
+            min-height: unset !important;
+            border-radius: 50% !important;
+            justify-self: center !important;
+            box-shadow: 0 12px 32px rgba(0,0,0,0.18), 0 0 0 4px rgba(26,104,130,0.14) !important;
+          }
+          .profile-img { transform: scale(1.55) translate(-3%, -14%); }
         }
         @media (max-width: 520px) {
           .bento-grid { grid-template-columns: 1fr !important; }
           .bento-grid > * { grid-column: 1 !important; }
-          .bento-grid > *:nth-child(2) { min-height: 280px !important; }
-          .profile-img { transform: scale(1.3) translate(-2%, -10%); }
+          .photo-card {
+            width: 150px !important;
+            height: 150px !important;
+          }
+          .profile-img { transform: scale(1.5) translate(-3%, -12%); }
         }
       `}</style>
     </section>

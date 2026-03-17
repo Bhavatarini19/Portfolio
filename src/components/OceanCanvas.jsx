@@ -215,12 +215,18 @@ export default function OceanCanvas() {
 
       // ── 5. Waves ─────────────────────────────────────────────
       if (!reduced) {
+        // Scale frequency so ~2 full wave cycles always visible regardless of screen width
+        const freqMult = Math.max(1, 1200 / w)
+        const ampMult  = w < 600 ? 1.6 : w < 900 ? 1.2 : 1
+
         WAVE_BASE.forEach((wv, i) => {
           const phase = waveOffsets.current[i]
           const baseY = h * wv.yBase
-          const wc = t.waveColors[i]
+          const wc    = t.waveColors[i]
+          const freq  = wv.freq * freqMult
+          const amp   = wv.amp  * ampMult
 
-          const wGrad = ctx.createLinearGradient(0, baseY - wv.amp, 0, baseY + wv.amp * 5)
+          const wGrad = ctx.createLinearGradient(0, baseY - amp, 0, baseY + amp * 5)
           wGrad.addColorStop(0, `rgba(${wc.cr},${wc.cg},${wc.cb},${wc.ca})`)
           wGrad.addColorStop(1, `rgba(${wc.cr},${wc.cg},${wc.cb},0)`)
 
@@ -228,8 +234,8 @@ export default function OceanCanvas() {
           ctx.moveTo(0, h)
           for (let x = 0; x <= w; x += 3) {
             const y = baseY
-              + Math.sin(x * wv.freq + phase) * wv.amp
-              + Math.sin(x * wv.freq * 1.7 + phase * 0.6) * (wv.amp * 0.28)
+              + Math.sin(x * freq + phase) * amp
+              + Math.sin(x * freq * 1.7 + phase * 0.6) * (amp * 0.28)
             ctx.lineTo(x, y)
           }
           ctx.lineTo(w, h)
@@ -241,8 +247,8 @@ export default function OceanCanvas() {
           ctx.beginPath()
           for (let x = 0; x <= w; x += 3) {
             const y = baseY
-              + Math.sin(x * wv.freq + phase) * wv.amp
-              + Math.sin(x * wv.freq * 1.7 + phase * 0.6) * (wv.amp * 0.28)
+              + Math.sin(x * freq + phase) * amp
+              + Math.sin(x * freq * 1.7 + phase * 0.6) * (amp * 0.28)
             x === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y)
           }
           ctx.strokeStyle = t.isDark
