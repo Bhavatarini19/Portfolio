@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Skills &middot; Bhavatarini Thangaraju</title>
+  <link rel="stylesheet" href="shared.css">
+  <style>
+    body{background:var(--bg-alt);overflow:hidden;}
+
+    .skills-shell{
+      height:calc(100vh - 64px);
+      display:flex;flex-direction:column;
+    }
+
+    .skills-header{
+      padding:2rem 3rem 1.25rem;
+      background:var(--bg-alt);
+      border-bottom:1px solid var(--border);
+      flex-shrink:0;
+    }
+    .skills-header h1{
+      font-family:'Cormorant Garamond',serif;
+      font-size:clamp(1.8rem,3vw,2.6rem);font-style:italic;
+    }
+
+    .skills-body{
+      flex:1;overflow-y:auto;
+      padding:1.5rem 3rem 2rem;
+    }
+
+    .garden-grid{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:1.25rem 1.5rem;
+    }
+
+    .bed-card{
+      position:relative;
+      background:#fff;
+      border-radius:var(--radius-lg);
+      padding:1.75rem 1.5rem 1.5rem;
+      border:1px solid var(--border);
+      box-shadow:var(--shadow-sm);
+      transition:var(--tr);
+    }
+    .bed-card:hover{
+      border-color:var(--teal);
+      box-shadow:var(--shadow-md);
+      transform:translateY(-3px);
+    }
+
+    .bed-stake{
+      position:absolute;top:-1rem;left:1.5rem;
+      background:#fff;
+      border:1.5px solid var(--border);
+      border-radius:999px;
+      padding:.3rem 1rem;
+      font-family:'JetBrains Mono',monospace;
+      font-size:.72rem;font-weight:500;
+      color:var(--text);white-space:nowrap;
+      box-shadow:0 2px 8px rgba(0,0,0,.06);
+      display:flex;align-items:center;gap:.4rem;
+    }
+    .bed-card:hover .bed-stake{
+      border-color:var(--teal);color:var(--teal);
+    }
+
+    .bed-chips{
+      display:flex;flex-wrap:wrap;gap:.45rem;margin-top:.4rem;
+    }
+
+    .skill-chip{
+      display:inline-flex;align-items:center;
+      padding:.3rem .8rem;
+      background:var(--bg-alt);
+      border:1px solid var(--border);
+      border-radius:999px;
+      font-size:.78rem;color:var(--text);
+      font-family:'DM Sans',sans-serif;
+      transition:var(--tr);cursor:default;
+    }
+    .skill-chip:hover{
+      background:var(--teal-lt);
+      border-color:var(--teal);
+      color:var(--teal);
+      transform:scale(1.05);
+    }
+
+    .bed-accent{
+      height:3px;border-radius:0 0 var(--radius-lg) var(--radius-lg);
+      margin:1.25rem -1.5rem -1.5rem;
+    }
+    .accent-teal{background:linear-gradient(90deg,var(--teal-lt),var(--teal),var(--teal-lt));}
+    .accent-amber{background:linear-gradient(90deg,var(--amber-lt),var(--amber),var(--amber-lt));}
+    .accent-sage{background:linear-gradient(90deg,var(--sage-lt),var(--sage),var(--sage-lt));}
+    .accent-slate{background:linear-gradient(90deg,var(--slate-lt),var(--slate),var(--slate-lt));}
+
+    @media(max-width:900px){
+      body{overflow:auto;}
+      .skills-shell{height:auto;}
+      .garden-grid{grid-template-columns:repeat(2,1fr);}
+      .skills-body{overflow-y:visible;}
+    }
+    @media(max-width:600px){
+      .skills-header{padding:1.5rem 1.5rem 1rem;}
+      .skills-body{padding:1.25rem 1.25rem 2rem;}
+      .garden-grid{grid-template-columns:1fr;}
+    }
+  </style>
+</head>
+<body>
+<div id="pt"></div>
+<nav class="site-nav" id="main-nav">
+  <a href="index.html" class="nav-logo">BT</a>
+  <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu">
+    <span></span><span></span><span></span>
+  </button>
+  <ul class="nav-links" id="nav-links">
+    <li><a href="about.html">About</a></li>
+    <li><a href="experience.html">Experience</a></li>
+    <li><a href="projects.html">Projects</a></li>
+    <li><a href="skills.html" class="active">Skills</a></li>
+    <li><a href="education.html">Education</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+</nav>
+
+<div class="pt-page skills-shell">
+
+  <header class="skills-header">
+    <p class="section-label">04 &middot; Skills</p>
+    <h1>Technical Toolkit</h1>
+  </header>
+
+  <div class="skills-body">
+    <div class="garden-grid">
+
+      <div class="bed-card reveal">
+        <div class="bed-stake">&#x1F527; Languages &amp; Frameworks</div>
+        <div class="bed-chips">
+          <span class="skill-chip">Java</span>
+          <span class="skill-chip">Spring Boot</span>
+          <span class="skill-chip">Spring Security</span>
+          <span class="skill-chip">TypeScript</span>
+          <span class="skill-chip">React</span>
+          <span class="skill-chip">Python</span>
+          <span class="skill-chip">Angular</span>
+          <span class="skill-chip">C</span>
+        </div>
+        <div class="bed-accent accent-teal"></div>
+      </div>
+
+      <div class="bed-card reveal">
+        <div class="bed-stake">&#x1F310; Backend &amp; APIs</div>
+        <div class="bed-chips">
+          <span class="skill-chip">REST</span>
+          <span class="skill-chip">gRPC</span>
+          <span class="skill-chip">Microservices</span>
+          <span class="skill-chip">Kafka</span>
+          <span class="skill-chip">API Gateway</span>
+          <span class="skill-chip">JWT / RBAC</span>
+          <span class="skill-chip">Maven</span>
+          <span class="skill-chip">Postman</span>
+        </div>
+        <div class="bed-accent accent-teal"></div>
+      </div>
+
+      <div class="bed-card reveal">
+        <div class="bed-stake">&#x1F5C4; Databases</div>
+        <div class="bed-chips">
+          <span class="skill-chip">Oracle</span>
+          <span class="skill-chip">PostgreSQL</span>
+          <span class="skill-chip">MongoDB</span>
+          <span class="skill-chip">Snowflake</span>
+          <span class="skill-chip">Hive</span>
+          <span class="skill-chip">Spring Batch</span>
+        </div>
+        <div class="bed-accent accent-amber"></div>
+      </div>
+
+      <div class="bed-card reveal">
+        <div class="bed-stake">&#x2601; Cloud &amp; DevOps</div>
+        <div class="bed-chips">
+          <span class="skill-chip">AWS ECS</span>
+          <span class="skill-chip">AWS RDS</span>
+          <span class="skill-chip">AWS MSK</span>
+          <span class="skill-chip">AWS Lambda</span>
+          <span class="skill-chip">AWS S3</span>
+          <span class="skill-chip">Kubernetes</span>
+          <span class="skill-chip">Docker</span>
+          <span class="skill-chip">Jenkins CI/CD</span>
+          <span class="skill-chip">Git</span>
+        </div>
+        <div class="bed-accent accent-amber"></div>
+      </div>
+
+      <div class="bed-card reveal" style="grid-column:span 2;">
+        <div class="bed-stake">&#x1F9E0; AI &amp; Data Science</div>
+        <div class="bed-chips">
+          <span class="skill-chip">PyTorch</span>
+          <span class="skill-chip">Scikit-learn</span>
+          <span class="skill-chip">XGBoost</span>
+          <span class="skill-chip">NLTK</span>
+          <span class="skill-chip">SentenceTransformer</span>
+          <span class="skill-chip">OpenCV</span>
+          <span class="skill-chip">Pandas</span>
+          <span class="skill-chip">FastAPI</span>
+          <span class="skill-chip">FAISS</span>
+          <span class="skill-chip">Streamlit</span>
+        </div>
+        <div class="bed-accent accent-sage"></div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+<footer class="site-footer">
+  <a href="index.html" class="footer-logo">BT</a>
+  <nav class="footer-links">
+    <a href="about.html">About</a>
+    <a href="experience.html">Experience</a>
+    <a href="projects.html">Projects</a>
+    <a href="skills.html">Skills</a>
+    <a href="education.html">Education</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+  <p class="footer-copy">&#x2756; Bhavatarini Thangaraju &middot; Chicago, IL &middot; bhavatarinithangaraju@gmail.com</p>
+</footer>
+<script>
+  const nt=document.getElementById('nav-toggle'),nl=document.getElementById('nav-links');
+  if(nt)nt.addEventListener('click',()=>nl.classList.toggle('open'));
+  document.querySelectorAll('a[href]').forEach(function(link){
+    var h=link.getAttribute('href');
+    if(h&&!h.startsWith('#')&&!h.startsWith('mailto')&&!h.startsWith('tel')&&!h.startsWith('http')){
+      link.addEventListener('click',function(e){e.preventDefault();var o=document.getElementById('pt');o.classList.add('active');setTimeout(function(){window.location.href=h;},500);});
+    }
+  });
+  window.addEventListener('pageshow',function(){var o=document.getElementById('pt');if(o)o.classList.remove('active');});
+  var ro=new IntersectionObserver(function(entries){entries.forEach(function(e,i){if(e.isIntersecting)setTimeout(function(){e.target.classList.add('in');},i*100);});},{threshold:.1});
+  document.querySelectorAll('.reveal,.reveal-l,.reveal-r').forEach(function(el){ro.observe(el);});
+</script>
+</body>
+</html>

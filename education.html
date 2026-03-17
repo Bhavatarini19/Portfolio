@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Education &middot; Bhavatarini Thangaraju</title>
+  <link rel="stylesheet" href="shared.css">
+  <style>
+    body{background:var(--bg);overflow:hidden;}
+
+    .edu-shell{
+      height:calc(100vh - 64px);
+      display:flex;flex-direction:column;
+    }
+
+    .edu-header{
+      padding:2rem 3rem 1.25rem;
+      background:var(--bg);
+      border-bottom:1px solid var(--border);
+      flex-shrink:0;
+    }
+    .edu-header h1{
+      font-family:'Cormorant Garamond',serif;
+      font-size:clamp(1.8rem,3vw,2.6rem);font-style:italic;
+    }
+
+    .edu-body{
+      flex:1;overflow-y:auto;
+      padding:2rem 3rem;
+      display:grid;
+      grid-template-columns:1fr 380px;
+      gap:1.5rem;
+      align-items:start;
+    }
+
+    /* ── Left: Degree card ──────────────────── */
+    .cert-card{
+      background:#fff;
+      border-radius:var(--radius-lg);
+      padding:2.5rem 2.75rem;
+      border:1px solid var(--border);
+      box-shadow:var(--shadow-sm);
+      position:relative;
+      overflow:hidden;
+    }
+    .cert-card::before{
+      content:'';
+      position:absolute;top:0;left:0;right:0;height:4px;
+      background:linear-gradient(90deg,var(--teal),var(--teal-mid),var(--amber));
+    }
+
+    .cert-school{
+      font-family:'JetBrains Mono',monospace;
+      font-size:.72rem;font-weight:500;
+      letter-spacing:.14em;color:var(--teal);
+      text-transform:uppercase;margin-bottom:.6rem;
+    }
+    .cert-degree{
+      font-family:'Cormorant Garamond',serif;
+      font-size:clamp(1.8rem,3vw,2.6rem);
+      font-style:italic;color:var(--text);
+      margin-bottom:1.25rem;line-height:1.2;
+    }
+    .cert-meta{
+      display:flex;gap:1.5rem;flex-wrap:wrap;
+      margin-bottom:1.5rem;
+    }
+    .cert-meta-item{
+      display:flex;flex-direction:column;gap:.2rem;
+    }
+    .cert-meta-label{
+      font-family:'JetBrains Mono',monospace;
+      font-size:.65rem;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;
+    }
+    .cert-meta-val{
+      font-size:.9rem;font-weight:600;color:var(--text);
+    }
+    .cert-meta-val.teal{color:var(--teal);}
+
+    .cert-divider{
+      width:40px;height:2px;background:var(--teal);
+      border-radius:2px;margin-bottom:1.5rem;opacity:.7;
+    }
+
+    .cert-courses-label{
+      font-family:'JetBrains Mono',monospace;
+      font-size:.65rem;color:var(--muted);
+      letter-spacing:.12em;text-transform:uppercase;margin-bottom:.75rem;
+    }
+    .cert-courses{
+      display:flex;flex-wrap:wrap;gap:.45rem;
+    }
+
+    /* ── Right column ───────────────────────── */
+    .right-col{
+      display:flex;flex-direction:column;gap:1.25rem;
+    }
+
+    /* AWS Badge */
+    .badge-card{
+      background:#fff;border-radius:var(--radius-lg);
+      padding:1.5rem 1.75rem;
+      display:flex;align-items:center;gap:1.25rem;
+      box-shadow:var(--shadow-sm);
+      border:1px solid var(--border);
+      position:relative;overflow:hidden;
+      transition:var(--tr);
+    }
+    .badge-card:hover{border-color:var(--amber);box-shadow:var(--shadow-md);}
+    .badge-card::before{
+      content:'';
+      position:absolute;top:0;left:0;right:0;height:3px;
+      background:linear-gradient(90deg,var(--amber),#e8a040,var(--amber));
+    }
+    .badge-medallion{
+      width:64px;height:64px;border-radius:50%;
+      background:linear-gradient(135deg,var(--amber-lt),#f0d090);
+      border:2px solid var(--amber);
+      display:flex;flex-direction:column;
+      align-items:center;justify-content:center;
+      flex-shrink:0;
+    }
+    .badge-medallion-icon{font-size:1.4rem;line-height:1;}
+    .badge-medallion-year{
+      font-family:'JetBrains Mono',monospace;
+      font-size:.58rem;color:var(--amber);margin-top:.1rem;
+    }
+    .badge-title{
+      font-family:'Cormorant Garamond',serif;
+      font-size:1.25rem;font-weight:600;color:var(--text);
+      margin-bottom:.2rem;
+    }
+    .badge-sub{font-size:.8rem;color:var(--muted);line-height:1.5;}
+
+    /* Currently Learning */
+    .learning-card{
+      background:#fff;border-radius:var(--radius-lg);
+      padding:1.5rem 1.75rem;
+      border:1px solid var(--border);
+      box-shadow:var(--shadow-sm);
+      position:relative;overflow:hidden;
+    }
+    .learning-card::before{
+      content:'';
+      position:absolute;top:0;left:0;right:0;height:3px;
+      background:linear-gradient(90deg,var(--sage),var(--teal-mid),var(--sage));
+    }
+    .learning-card h3{
+      font-family:'Cormorant Garamond',serif;
+      font-size:1.2rem;font-style:italic;color:var(--text);
+      margin-bottom:1rem;
+    }
+    .learning-items{
+      display:grid;grid-template-columns:1fr 1fr;gap:.75rem;
+    }
+    .learning-item{
+      background:var(--bg-alt);
+      border-radius:var(--radius-md);
+      padding:.875rem 1rem;
+      display:flex;gap:.65rem;align-items:flex-start;
+      border:1px solid var(--border);
+      transition:var(--tr);
+    }
+    .learning-item:hover{border-color:var(--teal);}
+    .learning-icon{font-size:1.2rem;flex-shrink:0;margin-top:.05rem;}
+    .learning-title{font-weight:600;font-size:.82rem;color:var(--text);margin-bottom:.15rem;}
+    .learning-desc{font-size:.74rem;color:var(--muted);line-height:1.5;}
+
+    @media(max-width:900px){
+      body{overflow:auto;}
+      .edu-shell{height:auto;}
+      .edu-body{grid-template-columns:1fr;overflow-y:visible;}
+    }
+    @media(max-width:600px){
+      .edu-header{padding:1.5rem 1.5rem 1rem;}
+      .edu-body{padding:1.25rem;}
+      .cert-card{padding:1.75rem 1.5rem;}
+      .learning-items{grid-template-columns:1fr;}
+    }
+  </style>
+</head>
+<body>
+<div id="pt"></div>
+<nav class="site-nav" id="main-nav">
+  <a href="index.html" class="nav-logo">BT</a>
+  <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu">
+    <span></span><span></span><span></span>
+  </button>
+  <ul class="nav-links" id="nav-links">
+    <li><a href="about.html">About</a></li>
+    <li><a href="experience.html">Experience</a></li>
+    <li><a href="projects.html">Projects</a></li>
+    <li><a href="skills.html">Skills</a></li>
+    <li><a href="education.html" class="active">Education</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+</nav>
+
+<div class="pt-page edu-shell">
+
+  <header class="edu-header">
+    <p class="section-label">05 &middot; Education</p>
+    <h1>Foundations &amp; Growth</h1>
+  </header>
+
+  <div class="edu-body">
+
+    <!-- Left: Degree -->
+    <div class="cert-card reveal">
+      <p class="cert-school">Illinois Institute of Technology</p>
+      <h2 class="cert-degree">Master of Data Science</h2>
+      <div class="cert-meta">
+        <div class="cert-meta-item">
+          <span class="cert-meta-label">GPA</span>
+          <span class="cert-meta-val teal">3.9 / 4.0</span>
+        </div>
+        <div class="cert-meta-item">
+          <span class="cert-meta-label">Graduating</span>
+          <span class="cert-meta-val">Dec 2025</span>
+        </div>
+        <div class="cert-meta-item">
+          <span class="cert-meta-label">Location</span>
+          <span class="cert-meta-val">Chicago, IL</span>
+        </div>
+        <div class="cert-meta-item">
+          <span class="cert-meta-label">Duration</span>
+          <span class="cert-meta-val">Jan 2024 &ndash; Dec 2025</span>
+        </div>
+      </div>
+      <div class="cert-divider"></div>
+      <p class="cert-courses-label">Relevant Coursework</p>
+      <div class="cert-courses">
+        <span class="chip chip-rose">Machine Learning</span>
+        <span class="chip chip-rose">Deep Learning</span>
+        <span class="chip chip-rose">Distributed Systems</span>
+        <span class="chip chip-sage">Big Data Technologies</span>
+        <span class="chip chip-sage">NLP</span>
+        <span class="chip chip-sage">Data Engineering</span>
+        <span class="chip chip-lav">Cloud Computing</span>
+        <span class="chip chip-lav">Statistical Methods</span>
+        <span class="chip chip-lav">Computer Vision</span>
+      </div>
+    </div>
+
+    <!-- Right: AWS + Learning -->
+    <div class="right-col">
+
+      <div class="badge-card reveal">
+        <div class="badge-medallion">
+          <div class="badge-medallion-icon">&#x2601;</div>
+          <div class="badge-medallion-year">2024</div>
+        </div>
+        <div>
+          <h3 class="badge-title">AWS Certified Cloud Practitioner</h3>
+          <p class="badge-sub">Amazon Web Services &mdash; Cloud concepts, core services, security, architecture, and pricing.</p>
+        </div>
+      </div>
+
+      <div class="learning-card reveal">
+        <h3>Currently Exploring</h3>
+        <div class="learning-items">
+          <div class="learning-item">
+            <div class="learning-icon">&#x1F9E0;</div>
+            <div>
+              <div class="learning-title">LLM Engineering</div>
+              <div class="learning-desc">RAG architectures, fine-tuning, LangChain &amp; OpenAI API integration.</div>
+            </div>
+          </div>
+          <div class="learning-item">
+            <div class="learning-icon">&#x1F5C4;</div>
+            <div>
+              <div class="learning-title">Distributed Systems</div>
+              <div class="learning-desc">Consensus, distributed transactions, CAP theorem, fault tolerance.</div>
+            </div>
+          </div>
+          <div class="learning-item">
+            <div class="learning-icon">&#x2699;</div>
+            <div>
+              <div class="learning-title">System Design</div>
+              <div class="learning-desc">CQRS, event sourcing, saga patterns for 10M+ user scale.</div>
+            </div>
+          </div>
+          <div class="learning-item">
+            <div class="learning-icon">&#x2601;</div>
+            <div>
+              <div class="learning-title">AWS Solutions Arch.</div>
+              <div class="learning-desc">Preparing for SAA-C03 &mdash; high-availability &amp; cost optimization.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+<footer class="site-footer">
+  <a href="index.html" class="footer-logo">BT</a>
+  <nav class="footer-links">
+    <a href="about.html">About</a>
+    <a href="experience.html">Experience</a>
+    <a href="projects.html">Projects</a>
+    <a href="skills.html">Skills</a>
+    <a href="education.html">Education</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+  <p class="footer-copy">&#x2756; Bhavatarini Thangaraju &middot; Chicago, IL &middot; bhavatarinithangaraju@gmail.com</p>
+</footer>
+<script>
+  const nt=document.getElementById('nav-toggle'),nl=document.getElementById('nav-links');
+  if(nt)nt.addEventListener('click',()=>nl.classList.toggle('open'));
+  document.querySelectorAll('a[href]').forEach(function(link){
+    var h=link.getAttribute('href');
+    if(h&&!h.startsWith('#')&&!h.startsWith('mailto')&&!h.startsWith('tel')&&!h.startsWith('http')){
+      link.addEventListener('click',function(e){e.preventDefault();var o=document.getElementById('pt');o.classList.add('active');setTimeout(function(){window.location.href=h;},500);});
+    }
+  });
+  window.addEventListener('pageshow',function(){var o=document.getElementById('pt');if(o)o.classList.remove('active');});
+  var ro=new IntersectionObserver(function(entries){entries.forEach(function(e,i){if(e.isIntersecting)setTimeout(function(){e.target.classList.add('in');},i*100);});},{threshold:.1});
+  document.querySelectorAll('.reveal,.reveal-l,.reveal-r').forEach(function(el){ro.observe(el);});
+</script>
+</body>
+</html>

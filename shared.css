@@ -1,0 +1,193 @@
+/* ============================================================
+   COASTAL DUSK — shared.css
+   Bhavatarini Thangaraju · Portfolio
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500;1,600&family=DM+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@300;400;500&display=swap');
+
+/* ── Design Tokens ──────────────────────────────────────── */
+:root {
+  --bg:        #f7f6f2;   /* warm white */
+  --bg-alt:    #edecea;   /* warm light gray */
+  --teal:      #2e6b73;   /* deep ocean teal — primary */
+  --teal-lt:   #d4eaec;   /* tint */
+  --teal-mid:  #5a9ea8;   /* mid */
+  --amber:     #c07828;   /* warm amber gold — warmth, moon */
+  --amber-lt:  #f5e4c0;   /* tint */
+  --sage:      #4d7560;   /* deep sage — nature */
+  --sage-lt:   #d0e6da;   /* tint */
+  --slate:     #3a4f68;   /* deep blue-slate — depth */
+  --slate-lt:  #dae0ea;   /* tint */
+  --text:      #1a1e28;   /* near-black */
+  --muted:     #58667a;   /* gray-blue */
+  --border:    rgba(46,107,115,0.14);
+  --shadow-sm: 0 2px 12px rgba(26,30,40,0.06);
+  --shadow-md: 0 8px 32px rgba(26,30,40,0.10);
+  --shadow-lg: 0 20px 60px rgba(26,30,40,0.14);
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-lg: 18px;
+  --radius-xl: 40px;
+  --tr: all 0.3s cubic-bezier(0.4,0,0.2,1);
+}
+
+/* ── Reset ──────────────────────────────────────────────── */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;font-size:16px;}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);line-height:1.7;overflow-x:hidden;}
+img,svg{display:block;max-width:100%;}
+a{color:inherit;text-decoration:none;}
+ul{list-style:none;}
+h1,h2,h3,h4{font-family:'Cormorant Garamond',serif;line-height:1.15;color:var(--text);}
+
+/* ── Page Transition ────────────────────────────────────── */
+#pt{
+  position:fixed;inset:0;z-index:9999;
+  background:var(--teal);
+  transform:translateY(100%);
+  transition:transform .5s cubic-bezier(.76,0,.24,1);
+  pointer-events:none;
+}
+#pt.active{transform:translateY(0);}
+
+/* ── Navigation ─────────────────────────────────────────── */
+.site-nav{
+  position:fixed;top:0;left:0;right:0;z-index:1000;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 4rem;height:64px;
+  background:rgba(247,246,242,0.93);
+  backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);
+  border-bottom:1px solid var(--border);
+}
+.nav-logo{
+  font-family:'Cormorant Garamond',serif;font-style:italic;
+  font-size:1.4rem;font-weight:600;color:var(--text);
+  letter-spacing:.02em;transition:var(--tr);
+}
+.nav-logo:hover{color:var(--teal);}
+.nav-links{display:flex;align-items:center;gap:.2rem;}
+.nav-links a{
+  font-size:.82rem;font-weight:500;color:var(--muted);
+  padding:.45rem .8rem;border-radius:var(--radius-sm);
+  transition:var(--tr);position:relative;letter-spacing:.01em;
+}
+.nav-links a::after{
+  content:'·';position:absolute;bottom:1px;left:50%;
+  transform:translateX(-50%);color:var(--teal);font-size:.9rem;
+  opacity:0;transition:var(--tr);
+}
+.nav-links a:hover,.nav-links a.active{color:var(--text);background:var(--teal-lt);}
+.nav-links a.active::after{opacity:1;}
+.nav-links a:hover::after{opacity:.45;}
+
+/* ── Hamburger ──────────────────────────────────────────── */
+.nav-toggle{
+  display:none;flex-direction:column;gap:5px;
+  background:none;border:none;cursor:pointer;padding:4px;
+}
+.nav-toggle span{
+  display:block;width:22px;height:2px;
+  background:var(--text);border-radius:2px;transition:var(--tr);
+}
+
+/* ── Section Label ──────────────────────────────────────── */
+.section-label{
+  font-family:'JetBrains Mono',monospace;font-size:.7rem;font-weight:500;
+  letter-spacing:.18em;color:var(--teal);text-transform:uppercase;
+  display:flex;align-items:center;gap:.5rem;margin-bottom:.75rem;
+}
+
+/* ── Buttons ─────────────────────────────────────────────── */
+.btn{
+  display:inline-flex;align-items:center;gap:.5rem;
+  padding:.7rem 1.6rem;border-radius:var(--radius-xl);
+  font-family:'DM Sans',sans-serif;font-size:.875rem;font-weight:500;
+  cursor:pointer;border:2px solid transparent;
+  transition:var(--tr);text-decoration:none;white-space:nowrap;
+}
+.btn-rose{background:var(--teal);color:#fff;border-color:var(--teal);}
+.btn-rose:hover{background:#235659;border-color:#235659;transform:translateY(-2px);box-shadow:0 8px 24px rgba(46,107,115,.35);}
+.btn-ghost{background:transparent;color:var(--text);border-color:var(--border);}
+.btn-ghost:hover{background:var(--teal-lt);border-color:var(--teal);transform:translateY(-2px);}
+.btn-lav{background:var(--sage);color:#fff;border-color:var(--sage);}
+.btn-lav:hover{background:#3d5e4a;transform:translateY(-2px);box-shadow:0 8px 24px rgba(77,117,96,.35);}
+.btn-amber{background:var(--amber);color:#fff;border-color:var(--amber);}
+.btn-amber:hover{background:#9a6020;transform:translateY(-2px);box-shadow:0 8px 24px rgba(192,120,40,.35);}
+
+/* ── Chips ──────────────────────────────────────────────── */
+.chip{
+  display:inline-flex;align-items:center;gap:.3rem;
+  padding:.25rem .75rem;border-radius:999px;
+  font-family:'JetBrains Mono',monospace;font-size:.68rem;
+  font-weight:400;letter-spacing:.03em;
+}
+.chip-sage {background:var(--sage-lt); color:#284f3a;}
+.chip-rose {background:var(--teal-lt); color:#1a3f45;}
+.chip-lav  {background:var(--slate-lt);color:#253449;}
+.chip-gold {background:var(--amber-lt);color:#6a4515;}
+
+/* ── Reveal Animations ──────────────────────────────────── */
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s ease;}
+.reveal.in{opacity:1;transform:translateY(0);}
+.reveal-l{opacity:0;transform:translateX(-28px);transition:opacity .7s ease,transform .7s ease;}
+.reveal-l.in{opacity:1;transform:translateX(0);}
+.reveal-r{opacity:0;transform:translateX(28px);transition:opacity .7s ease,transform .7s ease;}
+.reveal-r.in{opacity:1;transform:translateX(0);}
+
+/* ── Utilities ──────────────────────────────────────────── */
+.container{width:100%;max-width:1200px;margin:0 auto;padding:0 2rem;}
+.pt-page{padding-top:64px;}
+
+/* ── Moon Phases (minimal) ──────────────────────────────── */
+.moon-phases{display:flex;align-items:center;gap:.6rem;justify-content:center;}
+.moon-phases .mp{
+  width:20px;height:20px;border-radius:50%;
+  border:1.5px solid rgba(77,117,96,.35);position:relative;overflow:hidden;
+}
+.mp-new{background:var(--slate);}
+.mp-new::after{display:none;}
+.mp-cres{background:var(--slate);}
+.mp-cres::after{content:'';position:absolute;border-radius:50%;background:var(--bg);width:16px;height:16px;top:1px;left:4px;}
+.mp-half{background:var(--slate);}
+.mp-half::after{content:'';position:absolute;width:10px;height:18px;top:1px;left:9px;background:var(--bg);border-radius:0 9px 9px 0;}
+.mp-gib{background:var(--slate-lt);}
+.mp-gib::after{content:'';position:absolute;width:7px;height:18px;top:1px;left:1px;background:var(--bg);border-radius:3px;}
+.mp-full{background:var(--amber-lt);border-color:var(--amber);}
+.mp-full::after{display:none;}
+
+/* ── Footer ─────────────────────────────────────────────── */
+.site-footer{
+  background:var(--text);color:rgba(255,255,255,.5);
+  padding:2.5rem 2rem;text-align:center;font-size:.875rem;
+}
+.site-footer .footer-logo{
+  font-family:'Cormorant Garamond',serif;font-style:italic;
+  font-size:1.7rem;color:#fff;margin-bottom:.75rem;display:block;
+}
+.site-footer .footer-links{
+  display:flex;justify-content:center;gap:1.75rem;
+  margin-bottom:1rem;flex-wrap:wrap;
+}
+.site-footer .footer-links a{color:rgba(255,255,255,.5);font-size:.8rem;transition:var(--tr);}
+.site-footer .footer-links a:hover{color:var(--teal-lt);}
+.site-footer .footer-copy{font-size:.72rem;color:rgba(255,255,255,.28);font-family:'JetBrains Mono',monospace;}
+
+/* ── Scrollbar ──────────────────────────────────────────── */
+::-webkit-scrollbar{width:4px;}
+::-webkit-scrollbar-track{background:var(--bg);}
+::-webkit-scrollbar-thumb{background:var(--teal);border-radius:2px;}
+
+/* ── Responsive ─────────────────────────────────────────── */
+@media(max-width:900px){
+  .site-nav{padding:0 1.5rem;}
+  .nav-links{
+    display:none;position:fixed;top:64px;left:0;right:0;
+    background:rgba(247,246,242,.97);backdrop-filter:blur(16px);
+    padding:1.25rem;flex-direction:column;gap:.2rem;
+    border-bottom:1px solid var(--border);box-shadow:var(--shadow-md);
+  }
+  .nav-links.open{display:flex;}
+  .nav-links a{font-size:.95rem;padding:.7rem 1rem;width:100%;}
+  .nav-toggle{display:flex;}
+}
+@media(max-width:600px){.container{padding:0 1.25rem;}}

@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About &middot; Bhavatarini Thangaraju</title>
+  <link rel="stylesheet" href="shared.css">
+  <style>
+    body{background:var(--bg);}
+    .about-page{
+      min-height:calc(100vh - 64px);
+      padding:5rem 6% 3rem;
+      display:flex;flex-direction:column;justify-content:center;
+      max-width:1200px;margin:0 auto;
+    }
+    .about-header{margin-bottom:2.5rem;}
+    .about-header h1{
+      font-family:'Cormorant Garamond',serif;
+      font-size:clamp(2.5rem,5vw,3.8rem);font-style:italic;
+      line-height:1.1;
+    }
+    .about-header h1 em{color:var(--teal);font-style:italic;}
+
+    /* Two-column layout */
+    .about-cols{
+      display:grid;grid-template-columns:1fr 360px;
+      gap:4rem;align-items:start;
+    }
+    .about-bio{
+      font-size:1rem;color:var(--muted);line-height:1.85;
+      margin-bottom:2rem;
+    }
+    .about-bio strong{color:var(--text);font-weight:600;}
+
+    /* Link cards */
+    .link-cards{display:flex;flex-direction:column;gap:.6rem;}
+    .link-card{
+      display:flex;align-items:center;gap:.875rem;
+      padding:.85rem 1.1rem;
+      background:#fff;border:1px solid var(--border);
+      border-radius:var(--radius-md);
+      color:var(--text);transition:var(--tr);
+    }
+    .link-card:hover{
+      border-color:var(--teal);
+      box-shadow:0 4px 20px rgba(46,107,115,.12);
+      transform:translateX(4px);
+    }
+    .lc-icon{
+      width:34px;height:34px;border-radius:var(--radius-sm);
+      background:var(--teal-lt);
+      display:flex;align-items:center;justify-content:center;
+      font-size:1rem;flex-shrink:0;
+    }
+    .lc-body{flex:1;}
+    .lc-label{font-weight:600;font-size:.875rem;color:var(--text);}
+    .lc-sub{font-family:'JetBrains Mono',monospace;font-size:.72rem;color:var(--muted);}
+    .lc-arr{color:var(--teal);font-size:1rem;}
+
+    /* Right column: stats */
+    .stats-col{display:flex;flex-direction:column;gap:1rem;}
+    .stat-card{
+      background:#fff;border:1px solid var(--border);
+      border-radius:var(--radius-md);
+      padding:1.25rem 1.5rem;
+      display:flex;align-items:center;gap:1.25rem;
+      transition:var(--tr);
+    }
+    .stat-card:hover{border-color:var(--teal);box-shadow:var(--shadow-sm);}
+    .stat-num{
+      font-family:'Cormorant Garamond',serif;
+      font-size:2.25rem;font-weight:600;
+      color:var(--teal);line-height:1;white-space:nowrap;
+    }
+    .stat-info{}
+    .stat-label{font-weight:600;font-size:.875rem;color:var(--text);}
+    .stat-sub{font-size:.78rem;color:var(--muted);}
+
+    /* Divider */
+    .about-divider{
+      width:48px;height:2px;background:var(--teal);
+      border-radius:2px;margin:1.5rem 0;opacity:.6;
+    }
+
+    @media(max-width:900px){
+      .about-cols{grid-template-columns:1fr;}
+      .stats-col{flex-direction:row;flex-wrap:wrap;}
+      .stat-card{flex:1;min-width:180px;}
+    }
+    @media(max-width:600px){
+      .about-page{padding:4.5rem 6% 3rem;}
+    }
+  </style>
+</head>
+<body>
+<div id="pt"></div>
+<nav class="site-nav" id="main-nav">
+  <a href="index.html" class="nav-logo">BT</a>
+  <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu">
+    <span></span><span></span><span></span>
+  </button>
+  <ul class="nav-links" id="nav-links">
+    <li><a href="about.html" class="active">About</a></li>
+    <li><a href="experience.html">Experience</a></li>
+    <li><a href="projects.html">Projects</a></li>
+    <li><a href="skills.html">Skills</a></li>
+    <li><a href="education.html">Education</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+</nav>
+
+<div class="pt-page">
+  <div class="about-page">
+
+    <header class="about-header reveal">
+      <p class="section-label">01 &middot; About</p>
+      <h1>Engineer. <em>Builder.</em> Solver.</h1>
+    </header>
+
+    <div class="about-cols">
+      <!-- Left: bio + links -->
+      <div class="reveal-l">
+        <p class="about-bio">
+          I&rsquo;m a <strong>Full-Stack and Backend Software Engineer</strong> based in Chicago, IL,
+          currently completing my Master of Data Science at <strong>Illinois Institute of Technology</strong> (GPA&nbsp;3.9).
+          With 3+ years at Bosch Global Software Technologies — progressing from intern to Software Engineer —
+          I&rsquo;ve built production microservices handling <strong>60M+ records</strong>,
+          secured APIs with JWT/RBAC, and deployed cloud-native systems on AWS with <strong>99.9% uptime</strong>.
+        </p>
+        <p class="about-bio">
+          My focus is backend and full-stack engineering, with hands-on experience in
+          <strong>Java, Spring Boot, Kafka, gRPC, React, and Python</strong>.
+          I also bring AI/ML integration capability — from NLP pipelines to computer vision systems —
+          making me effective across the full spectrum from systems architecture to intelligent applications.
+        </p>
+        <div class="about-divider"></div>
+        <div class="link-cards">
+          <a href="#" class="link-card">
+            <div class="lc-icon">&#x1F4C4;</div>
+            <div class="lc-body">
+              <div class="lc-label">Resume</div>
+              <div class="lc-sub">Download PDF</div>
+            </div>
+            <span class="lc-arr">&#x2192;</span>
+          </a>
+          <a href="https://linkedin.com/in/bhavatarini-thangaraju" target="_blank" rel="noopener" class="link-card">
+            <div class="lc-icon">&#x1F4BC;</div>
+            <div class="lc-body">
+              <div class="lc-label">LinkedIn</div>
+              <div class="lc-sub">linkedin.com/in/bhavatarini-thangaraju</div>
+            </div>
+            <span class="lc-arr">&#x2197;</span>
+          </a>
+          <a href="https://github.com/bhavatarini-thangaraju" target="_blank" rel="noopener" class="link-card">
+            <div class="lc-icon">&#x1F419;</div>
+            <div class="lc-body">
+              <div class="lc-label">GitHub</div>
+              <div class="lc-sub">github.com/bhavatarini-thangaraju</div>
+            </div>
+            <span class="lc-arr">&#x2197;</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Right: stats -->
+      <div class="stats-col reveal-r">
+        <div class="stat-card">
+          <div class="stat-num">3+</div>
+          <div class="stat-info">
+            <div class="stat-label">Years of Industry Experience</div>
+            <div class="stat-sub">Bosch · Labelmaster</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">60M+</div>
+          <div class="stat-info">
+            <div class="stat-label">Records Processed</div>
+            <div class="stat-sub">Spring Batch + Oracle PL/SQL</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">3.9</div>
+          <div class="stat-info">
+            <div class="stat-label">Graduate GPA</div>
+            <div class="stat-sub">Illinois Tech · M.S. Data Science</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">&#x2601;</div>
+          <div class="stat-info">
+            <div class="stat-label">AWS Certified</div>
+            <div class="stat-sub">Cloud Practitioner · 2024</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<footer class="site-footer">
+  <a href="index.html" class="footer-logo">BT</a>
+  <nav class="footer-links">
+    <a href="about.html">About</a>
+    <a href="experience.html">Experience</a>
+    <a href="projects.html">Projects</a>
+    <a href="skills.html">Skills</a>
+    <a href="education.html">Education</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+  <p class="footer-copy">&#x2756; Bhavatarini Thangaraju &middot; Chicago, IL &middot; bhavatarinithangaraju@gmail.com</p>
+</footer>
+<script>
+  const nt=document.getElementById('nav-toggle'),nl=document.getElementById('nav-links');
+  if(nt)nt.addEventListener('click',()=>nl.classList.toggle('open'));
+  document.querySelectorAll('a[href]').forEach(function(link){
+    var h=link.getAttribute('href');
+    if(h&&!h.startsWith('#')&&!h.startsWith('mailto')&&!h.startsWith('tel')&&!h.startsWith('http')){
+      link.addEventListener('click',function(e){e.preventDefault();var o=document.getElementById('pt');o.classList.add('active');setTimeout(function(){window.location.href=h;},500);});
+    }
+  });
+  window.addEventListener('pageshow',function(){var o=document.getElementById('pt');if(o)o.classList.remove('active');});
+  var ro=new IntersectionObserver(function(entries){entries.forEach(function(e,i){if(e.isIntersecting)setTimeout(function(){e.target.classList.add('in');},i*100);});},{threshold:.1});
+  document.querySelectorAll('.reveal,.reveal-l,.reveal-r').forEach(function(el){ro.observe(el);});
+</script>
+</body>
+</html>
