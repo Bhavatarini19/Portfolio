@@ -35,25 +35,21 @@ export default function OceanCanvas() {
     const ctx = canvas.getContext('2d')
     const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
 
-    const resize = () => {
-      // Read the canvas's own rendered CSS dimensions (set by width/height:100% in style)
-      // Never write canvas.style.width/height — let CSS control the visual size
+    const syncSize = () => {
       const dpr = window.devicePixelRatio || 1
       const w = canvas.offsetWidth
       const h = canvas.offsetHeight
-      if (!w || !h) return
+      if (!w || !h) return false
+      if (w === dims.current.w && h === dims.current.h) return true
       canvas.width  = w * dpr
       canvas.height = h * dpr
       ctx.setTransform(1, 0, 0, 1, 0, 0)
       ctx.scale(dpr, dpr)
       dims.current = { w, h }
+      return true
     }
-    // Defer first resize so CSS layout has applied
-    requestAnimationFrame(resize)
-    // Debounce ResizeObserver through rAF to avoid feedback loops
-    const ro = new ResizeObserver(() => requestAnimationFrame(resize))
-    if (canvas.parentElement) ro.observe(canvas.parentElement)
-    window.addEventListener('resize', resize, { passive: true })
+    requestAnimationFrame(syncSize)
+    window.addEventListener('resize', syncSize, { passive: true })
 
     particles.current = Array.from({ length: 18 }, () => ({
       x: Math.random(), y: 0.62 + Math.random() * 0.36,
@@ -65,6 +61,7 @@ export default function OceanCanvas() {
 
     let lastTs = 0
     const draw = (ts) => {
+      syncSize()
       const dt = Math.min((ts - lastTs) / 1000, 0.05)
       lastTs = ts
       const { w, h } = dims.current
@@ -294,8 +291,7 @@ export default function OceanCanvas() {
     animRef.current = requestAnimationFrame(draw)
     return () => {
       cancelAnimationFrame(animRef.current)
-      ro.disconnect()
-      window.removeEventListener('resize', resize)
+      window.removeEventListener('resize', syncSize)
     }
   }, []) // only runs once — themeRef stays current via the other useEffect
 
